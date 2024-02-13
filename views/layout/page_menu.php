@@ -7,7 +7,7 @@
                 <span class="lbl">Tablero</span>
             </span>
             <ul>               
-                <li><a href="dashboard-top-menu.html"><span class="lbl">Top menu</span></a></li>
+                <li><a href="#"><span class="lbl">Top menu</span></a></li>
             </ul>
         </li>
     </ul>

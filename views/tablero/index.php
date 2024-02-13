@@ -7,7 +7,7 @@ if (isset($_SESSION["ID_usuario"])) {
 
 	<div class="page-content">
 		<div class="container-fluid">
-			<h1>Waza</h1>
+			<h1>true</h1>
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
 

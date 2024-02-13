@@ -28,7 +28,7 @@
         //TODO: Función para obtener la ruta de la aplicación.
         public static function ruta(){
             //TODO: Se retorna la ruta de la aplicación en el servidor web.
-            return "http://localhost/isil-inventario/";
+            return "http://localhost/isil-sisinvent/";
         }
 
     }
