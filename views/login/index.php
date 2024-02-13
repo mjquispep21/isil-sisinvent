@@ -1,5 +1,13 @@
-<!DOCTYPE html>
+<?php
+require_once("../../Config/conexion.php");
+if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
+    require_once("../../Models/Usuario.php");
+    $usuario = new Usuario();
+    $usuario->login();
+}
 
+?>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
