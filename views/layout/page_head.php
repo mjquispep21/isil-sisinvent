@@ -13,8 +13,28 @@
     <link href="../../assets/img/favicon.57x57.png" rel="apple-touch-icon" type="image/png">
     <link href="../../assets/img/favicon.png" rel="icon" type="image/png">
     <link href="../../assets/img/favicon.ico" rel="shortcut icon">
+
+    <link rel="stylesheet" href="../../assets/css/separate/vendor/fancybox.min.css">
+    <link rel="stylesheet" href="../../assets/css/separate/pages/activity.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/lib/summernote/summernote.css" />
+    <link rel="stylesheet" href="../../assets/css/separate/pages/editor.min.css">
+
     <link rel="stylesheet" href="../../assets/css/lib/font-awesome/font-awesome.min.css">
     <link rel="stylesheet" href="../../assets/css/lib/bootstrap/bootstrap.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/lib/bootstrap-sweetalert/sweetalert.css">
+    <link rel="stylesheet" href="../../assets/css/separate/vendor/sweet-alert-animations.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/lib/datatables-net/datatables.min.css">
+    <link rel="stylesheet" href="../../assets/css/separate/vendor/datatables-net.min.css">
+
+    <link rel="stylesheet" href="../../assets/css/separate/vendor/select2.min.css">
+
     <link rel="stylesheet" href="../../assets/css/main.css">
+
+
+
+
 </head>
-<?php require_once("../layout/page_header.php") ?>
+<?php require_once("page_header.php") ?>

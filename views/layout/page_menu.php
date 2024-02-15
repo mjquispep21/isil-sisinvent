@@ -1,15 +1,29 @@
 <div class="mobile-menu-left-overlay"></div>
 <nav class="side-menu">
     <ul class="side-menu-list">
-        <li class="grey with-sub">
-            <span>
-                <i class="font-icon font-icon-dashboard"></i>
+        <li class="blue-dirty">
+            <a href="<?php echo Conectar::ruta() . "views/tablero/index.php" ?>">
+                <span class="glyphicon glyphicon-th"></span>
                 <span class="lbl">Tablero</span>
-            </span>
-            <ul>               
-                <li><a href="#"><span class="lbl">Top menu</span></a></li>
-            </ul>
+            </a>
         </li>
-    </ul>
+
+
+        <li class="blue-dirty with-sub">
+            <span>
+                <span class="glyphicon glyphicon-th"></span>
+                <span class="lbl">Gestion de Usuario</span>
+            </span>
+            <ul>
+                <li><a href="<?php echo Conectar::ruta() . "views/persona/registro.php" ?>"><span class="lbl">Registro</span></a></li>
+            </ul>
+            <ul>
+                <li><a href="<?php echo Conectar::ruta() . "views/persona/consulta.php" ?>"><span class="lbl">Consulta</span></a></li>
+            </ul>
+
+        </li>
+
+
+    </ul>|
 
 </nav>

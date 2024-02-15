@@ -12510,7 +12510,7 @@ html {
 }
 .side-menu-list a:hover .lbl,
 .side-menu-list li > span:hover .lbl {
-  color: #343434;
+  color: #ffffff;
 }
 .side-menu-list a.label-right,
 .side-menu-list li > span.label-right {
@@ -12578,7 +12578,7 @@ html {
   transform: rotate(0);
 }
 .side-menu-list li.opened > span .lbl {
-  color: #343434;
+  color: #00aff2;
 }
 .side-menu-list li.opened > ul {
   display: block !important;
@@ -12805,7 +12805,7 @@ html {
 .side-menu-list > li.grey .with-sub > span,
 .side-menu-list > li.grey.opened a,
 .side-menu-list > li.grey.opened > span {
-  border-left-color: #adb7be;
+  border-left-color: #00aff2;
 }
 .side-menu-list > li.red .fa,
 .side-menu-list > li.red .font-icon,

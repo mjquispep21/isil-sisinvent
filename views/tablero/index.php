@@ -11,7 +11,7 @@ if (isset($_SESSION["ID_usuario"])) {
 		</div><!--.container-fluid-->
 	</div><!--.page-content-->
 
-
+	<?php require_once("../layout/page_js.php") ?>
 	<?php require_once("../layout/page_footer.php") ?>
 
 <?php

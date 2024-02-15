@@ -22,9 +22,9 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["ID_usuario"];
 
             if ($row["ID_roles"] == "1") {
-                $sub_array[] = '<span class="badge badge-warning">Administrador</span>';
+                $sub_array[] = '<span class="label label-pill label-warning">Administrador</span>';
             } else {
-                $sub_array[] = '<span class="badge badge-success">Editor</span>';
+                $sub_array[] = '<span class="label label-pill label-success">Editor</span>';
             }
  
             $sub_array[] = $row["Nombre"];
@@ -36,7 +36,7 @@ switch ($_GET["op"]) {
 
 
 
-            $sub_array[] = '<button type="button" onClick="editar(' . $row["ID_usuario"] . ');"  id="' . $row["ID_usuario"] . '" class="btn btn-inline btn-warning btn-sm ladda-button"><i class="fa fa-edit"></i></button>';
+            $sub_array[] = '<button type="button" onClick="editar(' . $row["ID_usuario"] . ');"  id="' . $row["ID_usuario"] . '" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-edit"></i></button>';
 
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["ID_usuario"] . ');"  id="' . $row["ID_usuario"] . '" class="btn btn-inline btn-danger btn-sm ladda-button"><i class="fa fa-trash"></i></button>';
 

@@ -82,6 +82,8 @@ class Usuario extends Conectar
         return $resultado = $sql->fetch();        
     }
 
+
+
     public function delete_usuario($ID_usuario)
     {
         $conectar= parent::conexion();

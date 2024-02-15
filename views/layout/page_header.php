@@ -46,4 +46,4 @@
             </div><!--.site-header-content-->
         </div><!--.container-fluid-->
     </header>
-    <?php require_once("../layout/page_menu.php") ?>
+    <?php require_once("page_menu.php") ?>
