@@ -20,7 +20,7 @@ function guardaryeditar(e){
             console.log(datos);
             $('#usuario_form')[0].reset();
             /* TODO:Ocultar Modal */
-            $("#modalmantenimiento").modal('hide');
+            $("#registro").modal('hide');
             $('#usuario_data').DataTable().ajax.reload();
 
             /* TODO:Mensaje de Confirmacion */
@@ -35,6 +35,10 @@ function guardaryeditar(e){
 }
 
 $(document).ready(function(){
+
+    $('#rol_id').select2({
+        dropdownParent: $('#registro')
+    });
 
     tabla=$('#usuario_data').dataTable({
         "aProcessing": true,
@@ -97,17 +101,21 @@ function editar(ID_usuario){
     $.post("../../Controllers/usuario.php?op=mostrar", {ID_usuario : ID_usuario}, function (data) {
         console.log(data);
         data = JSON.parse(data);
-        $('#usu_id').val(data.usu_id);
-        $('#usu_nom').val(data.usu_nom);
-        $('#usu_ape').val(data.usu_ape);
-        $('#usu_correo').val(data.usu_correo);
-        $('#usu_pass').val(data.usu_pass);
-        $('#rol_id').val(data.rol_id).trigger('change');
-        $('#usu_telf').val(data.usu_telf);
+        $('#ID_roles').val(data.ID_roles).trigger('change');
+        $('#ID_usuario').val(data.ID_usuario);
+        $('#Nombre').val(data.Nombre);
+        $('#Apellidos').val(data.Apellidos);
+        $('#Correo').val(data.Correo);
+        $('#Numero').val(data.Numero);
+        $('#Usuario').val(data.Usuario);
+        $('#Contraseña').val(data.Contraseña);
+
+        
+        
     }); 
 
     /* TODO: Mostrar Modal */
-    $('#modalmantenimiento').modal('show');
+    $('#registro').modal('show');
 }
 
 /* TODO: Cambiar estado a eliminado en caso de confirmar mensaje */
@@ -142,11 +150,11 @@ function eliminar(ID_usuario){
 
 /* TODO: Limpiar Inputs */
 $(document).on("click","#btnnuevo", function(){
-    $('#usu_id').val('');
+    $('#ID_usuario').val('');
     $('#mdltitulo').html('Nuevo Registro');
     $('#usuario_form')[0].reset();
     /* TODO:Mostrar Modal */
-    $('#modalmantenimiento').modal('show');
+    $('#registro').modal('show');
 });
 
 init();

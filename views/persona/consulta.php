@@ -35,6 +35,8 @@ if (isset($_SESSION["ID_usuario"])) {
     <!--.page-content-->
 
 
+
+    <?php require_once("registro.php");?>
     <?php require_once("../layout/page_js.php") ?>
     
     <script type="text/javascript" src="mntusuario.js"></script>

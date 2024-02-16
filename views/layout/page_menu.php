@@ -14,9 +14,7 @@
                 <span class="glyphicon glyphicon-th"></span>
                 <span class="lbl">Gestion de Usuario</span>
             </span>
-            <ul>
-                <li><a href="<?php echo Conectar::ruta() . "views/persona/registro.php" ?>"><span class="lbl">Registro</span></a></li>
-            </ul>
+
             <ul>
                 <li><a href="<?php echo Conectar::ruta() . "views/persona/consulta.php" ?>"><span class="lbl">Consulta</span></a></li>
             </ul>

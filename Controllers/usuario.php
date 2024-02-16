@@ -26,7 +26,6 @@ switch ($_GET["op"]) {
             } else {
                 $sub_array[] = '<span class="label label-pill label-success">Editor</span>';
             }
- 
             $sub_array[] = $row["Nombre"];
             $sub_array[] = $row["Apellidos"];
             $sub_array[] = $row["Correo"];
