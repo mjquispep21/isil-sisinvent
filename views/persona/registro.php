@@ -9,12 +9,7 @@
 			</div>
 			<form method="post" id="usuario_form">
 				<div class="modal-body">
-					<input type="hidden" id="usu_id" name="usu_id">
-
-
-
-
-
+					<input type="hidden" id="ID_usuario" name="ID_usuario">
 
 					<div class="form-group">
 						<label class="form-label" for="ID_roles">Rol</label>

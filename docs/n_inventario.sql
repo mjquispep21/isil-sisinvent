@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 02-02-2024 a las 20:27:41
--- Versión del servidor: 5.6.51
--- Versión de PHP: 8.2.0
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 19-02-2024 a las 02:39:51
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `isil_inventario`
+-- Base de datos: `n_inventario`
 --
 
 -- --------------------------------------------------------
@@ -27,12 +27,10 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `almacen`
 --
 
-DROP TABLE IF EXISTS `almacen`;
-CREATE TABLE IF NOT EXISTS `almacen` (
-  `ID_Almacen` int(11) NOT NULL AUTO_INCREMENT,
-  `Tipo_almacen` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`ID_Almacen`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `almacen` (
+  `ID_Almacen` int(11) NOT NULL,
+  `Tipo_almacen` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `almacen`
@@ -48,12 +46,10 @@ INSERT INTO `almacen` (`ID_Almacen`, `Tipo_almacen`) VALUES
 -- Estructura de tabla para la tabla `equipo`
 --
 
-DROP TABLE IF EXISTS `equipo`;
-CREATE TABLE IF NOT EXISTS `equipo` (
-  `ID_equipo` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_equipo` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`ID_equipo`)
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `equipo` (
+  `ID_equipo` int(11) NOT NULL,
+  `Nombre_equipo` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `equipo`
@@ -83,7 +79,7 @@ INSERT INTO `equipo` (`ID_equipo`, `Nombre_equipo`) VALUES
 (21, 'AUDÍFONOS'),
 (22, 'MALETA CON 3 LUCES + 3 TRIPODES'),
 (23, 'MALETA CON 2 LUCES + 2 TRIPODES'),
-(24, 'MALETA CON 3 LUCES 650 + 1 TRIPODE AS01570051 + 2 050MKARF'),
+(24, 'MALETA CON 3 LUCES 650 + 1 TRIPODE AS01570051 + 2 '),
 (25, 'MALETA'),
 (26, 'TRÍPODE'),
 (27, 'BOWENS'),
@@ -188,55 +184,37 @@ INSERT INTO `equipo` (`ID_equipo`, `Nombre_equipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `estado`
---
-
-DROP TABLE IF EXISTS `estado`;
-CREATE TABLE IF NOT EXISTS `estado` (
-  `ID_estado` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_operatividad` int(11) NOT NULL,
-  `Observaciones` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID_estado`),
-  KEY `ID_operatividad` (`ID_operatividad`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `estado`
---
-
-INSERT INTO `estado` (`ID_estado`, `ID_operatividad`, `Observaciones`) VALUES
-(1, 2, 'Se rompio la patita'),
-(2, 1, 'La luz esta amarillenta');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `ficha`
 --
 
-DROP TABLE IF EXISTS `ficha`;
-CREATE TABLE IF NOT EXISTS `ficha` (
-  `ID_ficha` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_ubicacion` int(11) NOT NULL,
-  `ID_stock` int(11) NOT NULL,
+CREATE TABLE `ficha` (
+  `ID_ficha` int(11) NOT NULL,
+  `ID_sede` int(11) NOT NULL,
+  `ID_torre` int(11) NOT NULL,
+  `Salon` varchar(30) DEFAULT NULL,
+  `ID_almacen` int(11) NOT NULL,
+  `ID_equipo` int(11) NOT NULL,
+  `Descripcion` varchar(50) DEFAULT NULL,
+  `ID_marca` int(11) NOT NULL,
+  `ID_modelo` int(11) NOT NULL,
+  `Numero_serie` varchar(30) DEFAULT NULL,
+  `Codigo_isil` varchar(30) DEFAULT NULL,
+  `Cantidad` int(11) DEFAULT NULL,
+  `Imagen` mediumtext DEFAULT NULL,
   `ID_usuario` int(11) NOT NULL,
-  `ID_estado` int(11) NOT NULL,
+  `ID_operatividad` int(11) NOT NULL,
+  `Observaciones` varchar(50) DEFAULT NULL,
   `Fecha_registro` datetime DEFAULT NULL,
-  `ID_usuario_modificador` int(11) DEFAULT NULL,
-  `Fecha_modificacion` datetime DEFAULT NULL,
-  PRIMARY KEY (`ID_ficha`),
-  KEY `ID_ubicacion` (`ID_ubicacion`),
-  KEY `ID_stock` (`ID_stock`),
-  KEY `ID_usuario` (`ID_usuario`),
-  KEY `ID_estado` (`ID_estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `ID_usuario_modificador` varchar(90) DEFAULT NULL,
+  `Fecha_modificacion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `ficha`
 --
 
-INSERT INTO `ficha` (`ID_ficha`, `ID_ubicacion`, `ID_stock`, `ID_usuario`, `ID_estado`, `Fecha_registro`, `ID_usuario_modificador`, `Fecha_modificacion`) VALUES
-(1, 2, 2, 2, 2, '2024-01-22 14:59:31', NULL, NULL);
+INSERT INTO `ficha` (`ID_ficha`, `ID_sede`, `ID_torre`, `Salon`, `ID_almacen`, `ID_equipo`, `Descripcion`, `ID_marca`, `ID_modelo`, `Numero_serie`, `Codigo_isil`, `Cantidad`, `Imagen`, `ID_usuario`, `ID_operatividad`, `Observaciones`, `Fecha_registro`, `ID_usuario_modificador`, `Fecha_modificacion`) VALUES
+(1, 1, 1, '105', 1, 70, 'Memoria para camara', 5, 9, 'A212121', 'LM-212121', 1, NULL, 2, 3, 'Se encuentra partida por la mitad', '2024-02-18 19:02:32', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -244,12 +222,10 @@ INSERT INTO `ficha` (`ID_ficha`, `ID_ubicacion`, `ID_stock`, `ID_usuario`, `ID_e
 -- Estructura de tabla para la tabla `marca`
 --
 
-DROP TABLE IF EXISTS `marca`;
-CREATE TABLE IF NOT EXISTS `marca` (
-  `ID_marca` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_marca` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`ID_marca`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `marca` (
+  `ID_marca` int(11) NOT NULL,
+  `Nombre_marca` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `marca`
@@ -308,12 +284,10 @@ INSERT INTO `marca` (`ID_marca`, `Nombre_marca`) VALUES
 -- Estructura de tabla para la tabla `modelo`
 --
 
-DROP TABLE IF EXISTS `modelo`;
-CREATE TABLE IF NOT EXISTS `modelo` (
-  `ID_modelo` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_modelo` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`ID_modelo`)
-) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `modelo` (
+  `ID_modelo` int(11) NOT NULL,
+  `Nombre_modelo` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `modelo`
@@ -495,12 +469,10 @@ INSERT INTO `modelo` (`ID_modelo`, `Nombre_modelo`) VALUES
 -- Estructura de tabla para la tabla `operatividad`
 --
 
-DROP TABLE IF EXISTS `operatividad`;
-CREATE TABLE IF NOT EXISTS `operatividad` (
-  `ID_operatividad` int(11) NOT NULL AUTO_INCREMENT,
-  `Tipo_operatividad` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`ID_operatividad`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `operatividad` (
+  `ID_operatividad` int(11) NOT NULL,
+  `Tipo_operatividad` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `operatividad`
@@ -517,12 +489,10 @@ INSERT INTO `operatividad` (`ID_operatividad`, `Tipo_operatividad`) VALUES
 -- Estructura de tabla para la tabla `roles`
 --
 
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `ID_roles` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_Rol` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`ID_roles`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `roles` (
+  `ID_roles` int(11) NOT NULL,
+  `Nombre_Rol` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `roles`
@@ -539,12 +509,10 @@ INSERT INTO `roles` (`ID_roles`, `Nombre_Rol`) VALUES
 -- Estructura de tabla para la tabla `sede`
 --
 
-DROP TABLE IF EXISTS `sede`;
-CREATE TABLE IF NOT EXISTS `sede` (
-  `ID_sede` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_sede` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`ID_sede`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `sede` (
+  `ID_sede` int(11) NOT NULL,
+  `Nombre_sede` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `sede`
@@ -558,47 +526,13 @@ INSERT INTO `sede` (`ID_sede`, `Nombre_sede`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `stock`
---
-
-DROP TABLE IF EXISTS `stock`;
-CREATE TABLE IF NOT EXISTS `stock` (
-  `ID_stock` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_almacen` int(11) NOT NULL,
-  `ID_equipo` int(11) NOT NULL,
-  `Descripcion` varchar(50) DEFAULT NULL,
-  `ID_marca` int(11) NOT NULL,
-  `ID_modelo` int(11) NOT NULL,
-  `Numero_serie` varchar(30) DEFAULT NULL,
-  `Codigo_isil` varchar(30) DEFAULT NULL,
-  `Cantidad` int(11) DEFAULT NULL,
-  `Imagen` blob,
-  PRIMARY KEY (`ID_stock`),
-  KEY `ID_almacen` (`ID_almacen`),
-  KEY `ID_equipo` (`ID_equipo`),
-  KEY `ID_marca` (`ID_marca`),
-  KEY `ID_modelo` (`ID_modelo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `stock`
---
-
-INSERT INTO `stock` (`ID_stock`, `ID_almacen`, `ID_equipo`, `Descripcion`, `ID_marca`, `ID_modelo`, `Numero_serie`, `Codigo_isil`, `Cantidad`, `Imagen`) VALUES
-(2, 2, 2, 'Bateria 6t', 4, 58, '12345', '12345', 1, NULL);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `torre`
 --
 
-DROP TABLE IF EXISTS `torre`;
-CREATE TABLE IF NOT EXISTS `torre` (
-  `ID_torre` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre_torre` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`ID_torre`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `torre` (
+  `ID_torre` int(11) NOT NULL,
+  `Nombre_torre` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `torre`
@@ -614,49 +548,19 @@ INSERT INTO `torre` (`ID_torre`, `Nombre_torre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `ubicacion`
---
-
-DROP TABLE IF EXISTS `ubicacion`;
-CREATE TABLE IF NOT EXISTS `ubicacion` (
-  `ID_ubicacion` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_sede` int(11) NOT NULL,
-  `ID_torre` int(11) NOT NULL,
-  `Salon` int(11) DEFAULT NULL,
-  `Oficina` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`ID_ubicacion`),
-  KEY `ID_sede` (`ID_sede`),
-  KEY `ID_torre` (`ID_torre`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `ubicacion`
---
-
-INSERT INTO `ubicacion` (`ID_ubicacion`, `ID_sede`, `ID_torre`, `Salon`, `Oficina`) VALUES
-(1, 1, 1, 117, NULL),
-(2, 1, 1, NULL, 'Audiovisuales'),
-(3, 2, 3, 112, NULL);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `usuario`
 --
 
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `ID_usuario` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `usuario` (
+  `ID_usuario` int(11) NOT NULL,
   `ID_roles` int(11) NOT NULL,
-  `Nombre` varchar(100) DEFAULT NULL,
-  `Apellidos` varchar(200) DEFAULT NULL,
+  `Nombre` varchar(50) DEFAULT NULL,
+  `Apellidos` varchar(50) NOT NULL,
   `Correo` varchar(50) DEFAULT NULL,
   `Numero` int(11) DEFAULT NULL,
   `Usuario` varchar(30) DEFAULT NULL,
-  `Contraseña` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`ID_usuario`),
-  KEY `ID_roles` (`ID_roles`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+  `Contraseña` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
@@ -666,47 +570,164 @@ INSERT INTO `usuario` (`ID_usuario`, `ID_roles`, `Nombre`, `Apellidos`, `Correo`
 (1, 1, 'Miguel John', 'Quispe Pozo', 'correo1@gmail.com', 906838713, 'mquispe', '12345'),
 (2, 3, 'Gonzalo Ronald', 'García Saravia', 'correo2@gmail.com', 913593235, 'ggarcias', '12345'),
 (3, 1, 'Isaac Jedidias', 'Olivera Colonio ', 'correo3@gmail.com', 969703281, 'iolivera', '12345'),
-(4, 1, 'Gonzalo ', NULL, 'garciasaraviagonzalo@gmail.com', 98562101, 'ggarcia', '81dc9bdb52d04dc20036dbd8313ed055'),
-(5, 1, 'Gonzalo ', NULL, 'garciasaraviagonzalo@gmail.com', 98562101, 'ggarcia', 'ec6a6536ca304edf844d1d248a4f08dc'),
-(6, 3, 'Karla ', 'Chaccha', 'correo2@gmail.com', 987752489, 'kchacha', 'e1dad4486f26f5ef1b4807f37fa37b76'),
-(7, 3, 'Alexandrea Alexandrea ', 'Del Solar Maldini de las Casas', 'correo22@gmail.com', 973752339, 'aadelascasas', 'f23c92baa9b37099420c006ac4f7760f'),
-(8, 2, 'Li Xiao Long', '李小龙 Bruce Lee', 'correo33@gmail.com', 973778339, 'blee', '4c882dcb24bcb1bc225391a602feca7c'),
-(9, 1, 'pepe', 'el pollo', 'pepelpollo@gmail.com', 986532014, 'elpepe', '12345');
+(7, 3, 'Alexandrea Alexandrea ', 'Del Solar Maldini de las Casas', 'correo22@gmail.com', 973752339, 'aadelascasas', 'f23c92baa9b37099420c006ac4f776'),
+(9, 1, 'pepe', 'el pollo', 'pepelpollo@gmail.com', 986532014, 'elpepe', '12345'),
+(10, 2, 'test', 'test', 'tesqt@gmail.com', 12345, 'test', '098f6bcd4621d373cade4e832627b4'),
+(13, 2, 'Alexandrea Lausa', 'Del Solar Maldini de las Casas', 'correo22@gmail.com', 973752339, 'aadelascasas', '827ccb0eea8a706c4c34a16891f84e');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  ADD PRIMARY KEY (`ID_Almacen`);
+
+--
+-- Indices de la tabla `equipo`
+--
+ALTER TABLE `equipo`
+  ADD PRIMARY KEY (`ID_equipo`);
+
+--
+-- Indices de la tabla `ficha`
+--
+ALTER TABLE `ficha`
+  ADD PRIMARY KEY (`ID_ficha`),
+  ADD KEY `ID_sede` (`ID_sede`),
+  ADD KEY `ID_torre` (`ID_torre`),
+  ADD KEY `ID_almacen` (`ID_almacen`),
+  ADD KEY `ID_equipo` (`ID_equipo`),
+  ADD KEY `ID_marca` (`ID_marca`),
+  ADD KEY `ID_modelo` (`ID_modelo`),
+  ADD KEY `ID_operatividad` (`ID_operatividad`),
+  ADD KEY `ID_usuario` (`ID_usuario`);
+
+--
+-- Indices de la tabla `marca`
+--
+ALTER TABLE `marca`
+  ADD PRIMARY KEY (`ID_marca`);
+
+--
+-- Indices de la tabla `modelo`
+--
+ALTER TABLE `modelo`
+  ADD PRIMARY KEY (`ID_modelo`);
+
+--
+-- Indices de la tabla `operatividad`
+--
+ALTER TABLE `operatividad`
+  ADD PRIMARY KEY (`ID_operatividad`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`ID_roles`);
+
+--
+-- Indices de la tabla `sede`
+--
+ALTER TABLE `sede`
+  ADD PRIMARY KEY (`ID_sede`);
+
+--
+-- Indices de la tabla `torre`
+--
+ALTER TABLE `torre`
+  ADD PRIMARY KEY (`ID_torre`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`ID_usuario`),
+  ADD KEY `ID_roles` (`ID_roles`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  MODIFY `ID_Almacen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `equipo`
+--
+ALTER TABLE `equipo`
+  MODIFY `ID_equipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
+
+--
+-- AUTO_INCREMENT de la tabla `ficha`
+--
+ALTER TABLE `ficha`
+  MODIFY `ID_ficha` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `marca`
+--
+ALTER TABLE `marca`
+  MODIFY `ID_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT de la tabla `modelo`
+--
+ALTER TABLE `modelo`
+  MODIFY `ID_modelo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+
+--
+-- AUTO_INCREMENT de la tabla `operatividad`
+--
+ALTER TABLE `operatividad`
+  MODIFY `ID_operatividad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `ID_roles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `sede`
+--
+ALTER TABLE `sede`
+  MODIFY `ID_sede` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `torre`
+--
+ALTER TABLE `torre`
+  MODIFY `ID_torre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `ID_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `estado`
---
-ALTER TABLE `estado`
-  ADD CONSTRAINT `estado_ibfk_1` FOREIGN KEY (`ID_operatividad`) REFERENCES `operatividad` (`ID_operatividad`);
-
---
 -- Filtros para la tabla `ficha`
 --
 ALTER TABLE `ficha`
-  ADD CONSTRAINT `ficha_ibfk_1` FOREIGN KEY (`ID_ubicacion`) REFERENCES `ubicacion` (`ID_ubicacion`),
-  ADD CONSTRAINT `ficha_ibfk_2` FOREIGN KEY (`ID_stock`) REFERENCES `stock` (`ID_stock`),
-  ADD CONSTRAINT `ficha_ibfk_3` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID_usuario`),
-  ADD CONSTRAINT `ficha_ibfk_4` FOREIGN KEY (`ID_estado`) REFERENCES `estado` (`ID_estado`);
-
---
--- Filtros para la tabla `stock`
---
-ALTER TABLE `stock`
-  ADD CONSTRAINT `stock_ibfk_1` FOREIGN KEY (`ID_almacen`) REFERENCES `almacen` (`ID_Almacen`),
-  ADD CONSTRAINT `stock_ibfk_2` FOREIGN KEY (`ID_equipo`) REFERENCES `equipo` (`ID_equipo`),
-  ADD CONSTRAINT `stock_ibfk_3` FOREIGN KEY (`ID_marca`) REFERENCES `marca` (`ID_marca`),
-  ADD CONSTRAINT `stock_ibfk_4` FOREIGN KEY (`ID_modelo`) REFERENCES `modelo` (`ID_modelo`);
-
---
--- Filtros para la tabla `ubicacion`
---
-ALTER TABLE `ubicacion`
-  ADD CONSTRAINT `ubicacion_ibfk_1` FOREIGN KEY (`ID_sede`) REFERENCES `sede` (`ID_sede`),
-  ADD CONSTRAINT `ubicacion_ibfk_2` FOREIGN KEY (`ID_torre`) REFERENCES `torre` (`ID_torre`);
+  ADD CONSTRAINT `ficha_ibfk_1` FOREIGN KEY (`ID_sede`) REFERENCES `sede` (`ID_sede`),
+  ADD CONSTRAINT `ficha_ibfk_2` FOREIGN KEY (`ID_torre`) REFERENCES `torre` (`ID_torre`),
+  ADD CONSTRAINT `ficha_ibfk_3` FOREIGN KEY (`ID_almacen`) REFERENCES `almacen` (`ID_Almacen`),
+  ADD CONSTRAINT `ficha_ibfk_4` FOREIGN KEY (`ID_equipo`) REFERENCES `equipo` (`ID_equipo`),
+  ADD CONSTRAINT `ficha_ibfk_5` FOREIGN KEY (`ID_marca`) REFERENCES `marca` (`ID_marca`),
+  ADD CONSTRAINT `ficha_ibfk_6` FOREIGN KEY (`ID_modelo`) REFERENCES `modelo` (`ID_modelo`),
+  ADD CONSTRAINT `ficha_ibfk_7` FOREIGN KEY (`ID_operatividad`) REFERENCES `operatividad` (`ID_operatividad`),
+  ADD CONSTRAINT `ficha_ibfk_8` FOREIGN KEY (`ID_usuario`) REFERENCES `usuario` (`ID_usuario`);
 
 --
 -- Filtros para la tabla `usuario`

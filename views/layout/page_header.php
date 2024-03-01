@@ -22,7 +22,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
                                 <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
                                 <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Ayuda</a>
-                                
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="../Logout/logout.php"><span class="font-icon glyphicon glyphicon-log-out"></span>Cerrar Sesion</a>
                             </div>
@@ -32,14 +32,19 @@
                         </button>
                     </div><!--.site-header-shown-->
                     <div class="mobile-menu-right-overlay"></div>
+
+                    <input type="hidden" id="ID_usuariox" value="<?php echo $_SESSION["ID_usuario"] ?>"><!-- ID del Usuario -->
+                    <input type="hidden" id="ID_rolesx" value="<?php echo $_SESSION["ID_roles"] ?>"><!-- Rol del Usuario-->
                     <div class="site-header-collapsed">
                         <div class="site-header-collapsed-in">
                             <div class="dropdown dropdown-typical">
-                                <div class="dropdown-menu" aria-labelledby="dd-header-sales">                                 
-                                </div>
+                                <a href="#" class="dropdown-toggle no-arr">
+                                    <span class="font-icon font-icon-user"></span>
+                                    <span class="lblcontactonomx"><?php echo $_SESSION["Nombre"] ?> <?php echo $_SESSION["Apellidos"] ?></span>
+                                </a>
                             </div>
                             <!--.help-dropdown-->
-                            
+
                         </div><!--.site-header-collapsed-in-->
                     </div><!--.site-header-collapsed-->
                 </div><!--site-header-content-in-->

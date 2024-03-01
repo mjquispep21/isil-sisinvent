@@ -99,10 +99,9 @@ function editar(ID_usuario){
 
     /* TODO: Mostrar Informacion en los inputs */
     $.post("../../Controllers/usuario.php?op=mostrar", {ID_usuario : ID_usuario}, function (data) {
-        console.log(data);
         data = JSON.parse(data);
-        $('#ID_roles').val(data.ID_roles).trigger('change');
         $('#ID_usuario').val(data.ID_usuario);
+        $('#ID_roles').val(data.ID_roles).trigger('change');
         $('#Nombre').val(data.Nombre);
         $('#Apellidos').val(data.Apellidos);
         $('#Correo').val(data.Correo);

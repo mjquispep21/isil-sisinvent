@@ -51,7 +51,7 @@ class Usuario extends Conectar
     {
         $conectar= parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO usuario (ID_usuario, ID_roles, Nombre, Apellidos, Correo, Numero, Usuario, Contraseña) VALUES (NULL,?, ?, ?, ?, ?, ?,MD5(?));";
+        $sql = "INSERT INTO usuario (ID_usuario, ID_roles, Nombre, Apellidos, Correo, Numero, Usuario, Contraseña) VALUES (NULL,?, ?, ?, ?, ?, ?,? );";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ID_roles);
         $sql->bindValue(2, $Nombre);
@@ -64,11 +64,11 @@ class Usuario extends Conectar
         return $resultado = $sql->fetch();        
     }
 
-    public function update_usuario($ID_roles, $Nombre, $Apellidos, $Correo, $Numero, $Usuario, $Contraseña,$ID_usuario)
+    public function update_usuario($ID_usuario, $ID_roles, $Nombre, $Apellidos, $Correo, $Numero, $Usuario, $Contraseña)
     {
         $conectar= parent::conexion();
         parent::set_names();
-        $sql = "UPDATE usuario SET ID_roles=?, Nombre=?, Apellidos=?, Correo=?, Numero=?, Usuario=?, Contraseña=MD5(?) WHERE ID_usuario=?";
+        $sql = "UPDATE usuario SET ID_roles=?, Nombre=?, Apellidos=?, Correo=?, Numero=?, Usuario=?, Contraseña=? WHERE ID_usuario=?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ID_roles);
         $sql->bindValue(2, $Nombre);

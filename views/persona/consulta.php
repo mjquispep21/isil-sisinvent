@@ -7,6 +7,19 @@ if (isset($_SESSION["ID_usuario"])) {
 
     <div class="page-content">
         <div class="container-fluid">
+        <header class="section-header">
+                <div class="tbl">
+                    <div class="tbl-row">
+                        <div class="tbl-cell">
+                            <h3>Gestión de Usuarios</h3>
+                            <ol class="breadcrumb breadcrumb-simple">
+                                <li><a href="#">Home</a></li>
+                                <li class="active">Gestión de Usuarios</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </header>
             <div class="box-typical box-typical-padding">
                 <button type="button" id="btnnuevo" class="btn btn-inline btn-primary">Nuevo Registro</button>
                 <table id="usuario_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">

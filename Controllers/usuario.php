@@ -9,7 +9,7 @@ switch ($_GET["op"]) {
         if (empty($_POST["ID_usuario"])) {
             $usuario->insert_usuario($_POST["ID_roles"], $_POST["Nombre"], $_POST["Apellidos"], $_POST["Correo"], $_POST["Numero"], $_POST["Usuario"], $_POST["Contraseña"]);
         } else {
-            $usuario->update_usuario($_POST["ID_roles"], $_POST["Nombre"], $_POST["Apellidos"], $_POST["Correo"], $_POST["Numero"], $_POST["Usuario"], $_POST["Contraseña"], $_POST["ID_usuario"]);
+            $usuario->update_usuario($_POST["ID_usuario"], $_POST["ID_roles"], $_POST["Nombre"], $_POST["Apellidos"], $_POST["Correo"], $_POST["Numero"], $_POST["Usuario"], $_POST["Contraseña"]);
             break;
         }
 
@@ -22,9 +22,9 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["ID_usuario"];
 
             if ($row["ID_roles"] == "1") {
-                $sub_array[] = '<span class="label label-pill label-warning">Administrador</span>';
+                $sub_array[] = '<span class="label label-pill label-warning">Editor</span>';
             } else {
-                $sub_array[] = '<span class="label label-pill label-success">Editor</span>';
+                $sub_array[] = '<span class="label label-pill label-success">Administrador</span>';
             }
             $sub_array[] = $row["Nombre"];
             $sub_array[] = $row["Apellidos"];
@@ -59,6 +59,7 @@ switch ($_GET["op"]) {
         $datos = $usuario->get_usuario_por_id($_POST["ID_usuario"]);
         if (is_array($datos) == true and count($datos) > 0) {
             foreach ($datos as $row) {
+                $output["ID_usuario"] = $row["ID_usuario"];
                 $output["ID_roles"] = $row["ID_roles"];
                 $output["Nombre"] = $row["Nombre"];
                 $output["Apellidos"] = $row["Apellidos"];
