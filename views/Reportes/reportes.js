@@ -15,7 +15,10 @@ $(document).ready(function () {
         lengthChange: false,
         colReorder: true,
         buttons: [
-
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
         ],
         "ajax": {
             url: '../../Controllers/reportes.php?op=listar_stock',

@@ -20,7 +20,7 @@
                                 <img src="../../assets/img/avatar-2-64.png" alt="">
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
-                                <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
+                                <a class="dropdown-item" href="<?php echo Conectar::ruta() . "views/perfil/" ?>"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
                                 <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Ayuda</a>
 
                                 <div class="dropdown-divider"></div>
