@@ -14,8 +14,8 @@
 					<div class="form-group">
 						<label class="form-label" for="ID_roles">Rol</label>
 						<select class="select2" id="ID_roles" name="ID_roles">
-							<option value="1">Editor</option>
-							<option value="2">Administrador</option>
+							<option value="1">Administrador</option>
+							<option value="2">Editor</option>
 						</select>
 					</div>
 
@@ -46,8 +46,8 @@
 					</div>
 
 					<div class="form-group">
-						<label class="form-label" for="Contraseña">Contraseña</label>
-						<input type="text" class="form-control" id="Contraseña" name="Contraseña" placeholder="************" required>
+						<label class="form-label" for="contrasena">contrasena</label>
+						<input type="text" class="form-control" id="contrasena" name="contrasena" placeholder="************" required>
 					</div>
 
 

@@ -7,7 +7,7 @@ if (isset($_SESSION["ID_usuario"])) {
 
     <div class="page-content">
         <div class="container-fluid">
-        <header class="section-header">
+            <header class="section-header">
                 <div class="tbl">
                     <div class="tbl-row">
                         <div class="tbl-cell">
@@ -22,19 +22,18 @@ if (isset($_SESSION["ID_usuario"])) {
             </header>
             <div class="box-typical box-typical-padding">
                 <button type="button" id="btnnuevo" class="btn btn-inline btn-primary">Nuevo Registro</button>
-                <table id="usuario_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                <table id="usuario_data" class="table table-bordered table-striped table-vcenter js-dataTable-full text-center">
                     <thead>
                         <tr>
-                            <th style="width: 5px;">ID Usuario</th>
-                            <th style="width: 5%;">Rol </th>
-                            <th style="width: 10%;">Nombre</th>
-                            <th style="width: 10%;">Apellidos</th>
-                            <th style="width: 10%;">Correo</th>
-                            <th style="width: 10%;">Numero</th>
-                            <th style="width: 10%;">Usuario</th>
-                            <th style="width: 10%;">Contraseña</th>
-                            <th style="width: 10%;">Editar</th>
-                            <th style="width: 10%;">Eliminar</th>
+                            <th class="text-center" style="width: 5%;">ID Usuario</th>
+                            <th class="text-center">Rol </th>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Apellidos</th>
+                            <th class="text-center">Correo</th>
+                            <th class="text-center">Numero</th>
+                            <th class="text-center">Usuario</th>
+                            <th class="text-center">Editar</th>
+                            <th class="text-center">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,14 +43,14 @@ if (isset($_SESSION["ID_usuario"])) {
             </div>
         </div><!--.container-fluid-->
     </div>
-    
+
     <!--.page-content-->
 
 
 
-    <?php require_once("registro.php");?>
+    <?php require_once("registro.php"); ?>
     <?php require_once("../layout/page_js.php") ?>
-    
+
     <script type="text/javascript" src="mntusuario.js"></script>
 
     <?php require_once("../layout/page_footer.php") ?>

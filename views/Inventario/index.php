@@ -64,7 +64,7 @@ if (isset($_SESSION["ID_usuario"])) {
         </div><!--.container-fluid-->
     </div><!--.page-content-->
 
-    <?php require_once("modalinventario.php");?>
+    <?php require_once("modalinventario.php"); ?>
     <?php require_once("../layout/page_js.php") ?>
     <script type="text/javascript" src="inventario.js"></script>
     <?php require_once("../layout/page_footer.php") ?>
@@ -74,6 +74,3 @@ if (isset($_SESSION["ID_usuario"])) {
     header("Location:" . Conectar::ruta() . "index.php");
 }
 ?>
-
-
-    

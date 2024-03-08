@@ -191,7 +191,7 @@ function eliminar(ID_ficha) {
 }
 
 $(document).on("click", "#btnnuevo", function () {
-
+    $('#ID_ficha').val('');
     $('#mdltitulo').html('Nuevo Registro');
     $('#inventario_form')[0].reset();
     $('#modalinventario').modal('show');

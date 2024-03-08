@@ -4,12 +4,14 @@ require_once("../Config/conexion.php");
 require_once("../Models/Usuario.php");
 //TODO: Se crea una instancia de la clase Usuario
 $usuario = new Usuario();
+
+
 switch ($_GET["op"]) {
     case "guardaryeditar":
         if (empty($_POST["ID_usuario"])) {
-            $usuario->insert_usuario($_POST["ID_roles"], $_POST["Nombre"], $_POST["Apellidos"], $_POST["Correo"], $_POST["Numero"], $_POST["Usuario"], $_POST["Contraseña"]);
+            $usuario->insert_usuario($_POST["ID_roles"], $_POST["Nombre"], $_POST["Apellidos"], $_POST["Correo"], $_POST["Numero"], $_POST["Usuario"], $_POST["contrasena"]);
         } else {
-            $usuario->update_usuario($_POST["ID_usuario"], $_POST["ID_roles"], $_POST["Nombre"], $_POST["Apellidos"], $_POST["Correo"], $_POST["Numero"], $_POST["Usuario"], $_POST["Contraseña"]);
+            $usuario->update_usuario($_POST["ID_usuario"], $_POST["ID_roles"], $_POST["Nombre"], $_POST["Apellidos"], $_POST["Correo"], $_POST["Numero"], $_POST["Usuario"], $_POST["contrasena"]);
             break;
         }
 
@@ -22,19 +24,16 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["ID_usuario"];
 
             if ($row["ID_roles"] == "1") {
-                $sub_array[] = '<span class="label label-pill label-warning">Editor</span>';
+                $sub_array[] = '<span class="label label-pill label-warning">Administrador</span>';
             } else {
-                $sub_array[] = '<span class="label label-pill label-success">Administrador</span>';
+                $sub_array[] = '<span class="label label-pill label-success">Editor</span>';
             }
             $sub_array[] = $row["Nombre"];
             $sub_array[] = $row["Apellidos"];
             $sub_array[] = $row["Correo"];
             $sub_array[] = $row["Numero"];
             $sub_array[] = $row["Usuario"];
-            $sub_array[] = $row["Contraseña"];
-
-
-
+            
             $sub_array[] = '<button type="button" onClick="editar(' . $row["ID_usuario"] . ');"  id="' . $row["ID_usuario"] . '" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-edit"></i></button>';
 
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["ID_usuario"] . ');"  id="' . $row["ID_usuario"] . '" class="btn btn-inline btn-danger btn-sm ladda-button"><i class="fa fa-trash"></i></button>';
@@ -66,10 +65,19 @@ switch ($_GET["op"]) {
                 $output["Correo"] = $row["Correo"];
                 $output["Numero"] = $row["Numero"];
                 $output["Usuario"] = $row["Usuario"];
-                $output["Contraseña"] = $row["Contraseña"];
+                $output["contrasena"] = $row["contrasena"];
             }
             echo json_encode($output);
         } else {
             echo "No se encontraron datos";
         }
+
+        break;
+    case "password":
+        $usuario->update_pass($_POST["ID_usuario"],$_POST["contrasena"]);
+            break;
+        break;
 }
+
+
+    

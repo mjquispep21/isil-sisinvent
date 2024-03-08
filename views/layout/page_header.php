@@ -21,6 +21,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
                                 <a class="dropdown-item" href="<?php echo Conectar::ruta() . "views/perfil/" ?>"><span class="font-icon glyphicon glyphicon-user"></span>Perfil</a>
+                                
                                 <a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Ayuda</a>
 
                                 <div class="dropdown-divider"></div>
@@ -38,9 +39,9 @@
                     <div class="site-header-collapsed">
                         <div class="site-header-collapsed-in">
                             <div class="dropdown dropdown-typical">
-                                <a href="#" class="dropdown-toggle no-arr">
+                                <a href="<?php echo Conectar::ruta() . "views/perfil/" ?>" class="dropdown-toggle no-arr">
                                     <span class="font-icon font-icon-user"></span>
-                                    <span class="lblcontactonomx"><?php echo $_SESSION["Nombre"] ?> <?php echo $_SESSION["Apellidos"] ?></span>
+                                    <span class="lblcontactonomx"><?php echo $_SESSION["Nombre"] ?></span>
                                 </a>
                             </div>
                             <!--.help-dropdown-->

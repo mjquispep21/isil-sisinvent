@@ -15,3 +15,4 @@
 <script src="../../assets/js/summernote-ES.js"></script>
 
 <script src="../../assets/js/lib/select2/select2.full.min.js"></script>
+

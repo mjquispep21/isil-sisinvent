@@ -136,7 +136,7 @@ if (isset($_POST["enviar"]) and $_POST["enviar"] == "si") {
                                     <input id="usuario" class="form-control" type="text" placeholder="Usuario" name="Usuario" autocomplete="off">
                                 </div>
                                 <div class="form-group">
-                                    <input id="input" class="form-control" type="password" placeholder="Contraseña" name="Contraseña" autocomplete="off">
+                                    <input id="input" class="form-control" type="password" placeholder="Contraseña" name="contrasena" autocomplete="off">
                                 </div>
                                 <!--begin::Action-->
                                 <div class="kt-login-v2__actions">
