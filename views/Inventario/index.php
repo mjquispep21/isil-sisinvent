@@ -41,8 +41,7 @@ if (isset($_SESSION["ID_usuario"])) {
                             <th style="width: 1%;">Modelo</th>
                             <th style="width: 1%;">Numero serie</th>
                             <th style="width: 1%;">Codigo isil</th>
-                            <th style="width: 1%;">Cantidad</th>
-                            <th style="width: 1%;">Imagen</th>
+                            <th style="width: 5%;">Imagen</th>
                             <th style="width: 1%;">Usuario</th>
                             <th style="width: 1%;">Estado</th>
                             <th style="width: 1%;">Observaciones</th>
@@ -64,7 +63,7 @@ if (isset($_SESSION["ID_usuario"])) {
         </div><!--.container-fluid-->
     </div><!--.page-content-->
 
-    <?php require_once("modalinventario.php"); ?>
+    <?php require_once("modalinventario.php");?>
     <?php require_once("../layout/page_js.php") ?>
     <script type="text/javascript" src="inventario.js"></script>
     <?php require_once("../layout/page_footer.php") ?>
@@ -74,3 +73,6 @@ if (isset($_SESSION["ID_usuario"])) {
     header("Location:" . Conectar::ruta() . "index.php");
 }
 ?>
+
+
+    

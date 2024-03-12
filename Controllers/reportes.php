@@ -11,7 +11,7 @@ switch ($_GET["op"]) {
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
-
+            $sub_array[] = $row["ID_ficha"];
             $sub_array[] = $row["Nombre_sede"];
             $sub_array[] = $row["Nombre_torre"];
             $sub_array[] = $row["Salon"];
@@ -22,8 +22,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Nombre_modelo"];
             $sub_array[] = $row["Numero_serie"];
             $sub_array[] = $row["Codigo_isil"];
-            $sub_array[] = $row["Cantidad"];
-            $sub_array[] = $row["Imagen"];
+            $sub_array[] = '<img src="data:image/jpeg;base64,' . base64_encode($row["Imagen"]) . '" alt="Imagen" class="img-thumbnail" width="100" height="100">';
             $sub_array[] = $row["Nombre"].' '.$row["Apellidos"];
             if ($row["ID_operatividad"] == "1") {
                 $sub_array[] = '<span class="label label-pill label-success">Operativo</span>';
@@ -53,6 +52,7 @@ switch ($_GET["op"]) {
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
+            $sub_array[] = $row["ID_ficha"];
             $sub_array[] = $row["Nombre_sede"];
             $sub_array[] = $row["Nombre_equipo"];
             $sub_array[] = $row["Descripcion"];
@@ -60,7 +60,6 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Nombre_modelo"];
             $sub_array[] = $row["Numero_serie"];
             $sub_array[] = $row["Codigo_isil"];
-            $sub_array[] = $row["Cantidad"];
             if ($row["ID_operatividad"] == "1") {
                 $sub_array[] = '<span class="label label-pill label-success">Operativo</span>';
             } else if ($row["ID_operatividad"] == "2") {
@@ -97,8 +96,7 @@ switch ($_GET["op"]) {
                 $output["ID_modelo"] = $row["ID_modelo"];
                 $output["Numero_serie"] = $row["Numero_serie"];
                 $output["Codigo_isil"] = $row["Codigo_isil"];
-                $output["Cantidad"] = $row["Cantidad"];
-                $output["Imagen"] = $row["Imagen"];
+                $output["Imagen"] = base64_encode($row["Imagen"]);
                 $output["ID_usuario"] = $row["ID_usuario"];
                 $output["ID_operatividad"] = $row["ID_operatividad"];
                 $output["Observaciones"] = $row["Observaciones"];

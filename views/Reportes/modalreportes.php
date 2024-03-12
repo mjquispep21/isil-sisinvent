@@ -69,28 +69,22 @@
 								<select id="ID_modelo" name="ID_modelo" class="form-control" disabled></select>
 							</fieldset>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<fieldset class="form-group">
 								<label class="form-label" for="exampleInput">Número de Serie</label>
 								<input type="text" class="form-control" id="Numero_serie" name="Numero_serie" disabled>
 							</fieldset>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<fieldset class="form-group">
 								<label class="form-label" for="exampleInput">Codigo de Isil</label>
 								<input type="text" class="form-control" id="Codigo_isil" name="Codigo_isil" disabled>
 							</fieldset>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-12 display" style="margin-top: 20px;">
 							<fieldset class="form-group">
-								<label class="form-label" for="exampleInput">Cantidad</label>
-								<input type="text" class="form-control" id="Cantidad" name="Cantidad" disabled>
-							</fieldset>
-						</div>
-						<div class="col-lg-12">
-							<fieldset class="form-group">
-								<label class="form-label" for="exampleInput">Imagen</label>
-								<input type="text" class="form-control" id="Imagen" name="Imagen" disabled>
+								<label class="form-label text-center" for="exampleInput">-- Imagen --</label>
+								<img id="Imagen" name="Imagen" class="img-thumbnail" width="100%" height="auto">
 							</fieldset>
 						</div>
 						<input type="hidden" id="ID_usuario" name="ID_usuario" value="<?php echo $_SESSION["ID_usuario"] ?>">

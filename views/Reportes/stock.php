@@ -30,6 +30,7 @@ if (isset($_SESSION["ID_usuario"])) {
                     <thead>
                         <tr>
 
+                            <th style="width: 1%;">ID</th>
                             <th style="width: 1%;">Sede</th>
                             <th style="width: 10%;">Nombre del equipo</th>
                             <th style="width: 1%;">Descripción</th>
@@ -37,7 +38,6 @@ if (isset($_SESSION["ID_usuario"])) {
                             <th style="width: 10%;">Modelo</th>
                             <th style="width: 1%;">Numero serie</th>
                             <th style="width: 1%;">Codigo isil</th>
-                            <th style="width: 1%;">Cantidad</th>
                             <th style="width: 1%;">Estado</th>
 
                             <th class="text-center" style="width: 5%;"></th>

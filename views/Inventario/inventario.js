@@ -133,7 +133,7 @@ function editar(ID_ficha) {
 
     $('#mdltitulo').html('Editar Registro');
 
-    $.post("../../Controllers/inventario.php?op=mostrar", { ID_ficha: ID_ficha }, function (data) {
+    $.post("../../Controllers/inventario.php?op=mostrar", {ID_ficha: ID_ficha}, function (data) {
         data = JSON.parse(data);
         $('#ID_ficha').val(data.ID_ficha);
         $('#ID_sede').val(data.ID_sede).trigger('change');
@@ -146,8 +146,6 @@ function editar(ID_ficha) {
         $('#ID_modelo').val(data.ID_modelo).trigger('change');
         $('#Numero_serie').val(data.Numero_serie);
         $('#Codigo_isil').val(data.Codigo_isil);
-        $('#Cantidad').val(data.Cantidad);
-        $('#Imagen').val(data.Imagen);
         $('#ID_usuario').val(data.ID_usuario);
         $('#ID_operatividad').val(data.ID_operatividad).trigger('change');
         $('#Observaciones').val(data.Observaciones);

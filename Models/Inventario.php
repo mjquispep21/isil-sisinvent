@@ -1,11 +1,30 @@
 <?php
-class Ficha extends Conectar {
-
-
-    public function insert_ficha($ID_sede, $ID_torre, $Salon, $ID_almacen, $ID_equipo, $Descripcion, $ID_marca, $ID_modelo, $Numero_serie, $Codigo_isil, $Cantidad, $Imagen, $ID_usuario, $ID_operatividad, $Observaciones){
-        $conectar= parent::conexion();
+class Ficha extends Conectar
+{
+    public function insert_ficha($ID_sede, $ID_torre, $Salon, $ID_almacen, $ID_equipo, $Descripcion, $ID_marca, $ID_modelo, $Numero_serie, $Codigo_isil, $Imagen, $ID_usuario, $ID_operatividad, $Observaciones)
+    {
+        $conectar = parent::conexion();
         parent::set_names();
-        $sql = "INSERT INTO ficha (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, Cantidad, Imagen, ID_usuario, ID_operatividad, Observaciones, Fecha_registro, ID_usuario_modificador, Fecha_modificacion) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, now(), NULL, NULL);";
+
+        $imagen_contenido = null;
+
+        // Verificar si se proporcionó una imagen
+        if (!empty($Imagen["tmp_name"])) {
+            $allowed_formats = array('jpg', 'jpeg', 'png');
+            $max_file_size = 5 * 1024 * 1024;
+
+            $file_info = pathinfo($Imagen["name"]);
+            $file_extension = strtolower($file_info['extension']);
+
+            if (in_array($file_extension, $allowed_formats) && $Imagen["size"] <= $max_file_size) {
+                $imagen_contenido = file_get_contents($Imagen["tmp_name"]);
+            } else {
+                echo "Error: Formato de archivo no permitido o tamaño excedido.";
+                return;
+            }
+        }
+
+        $sql = "INSERT INTO ficha (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, Imagen, ID_usuario, ID_operatividad, Observaciones, Fecha_registro, ID_usuario_modificador, Fecha_modificacion) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?, now(), NULL, NULL);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ID_sede);
         $sql->bindValue(2, $ID_torre);
@@ -17,18 +36,39 @@ class Ficha extends Conectar {
         $sql->bindValue(8, $ID_modelo);
         $sql->bindValue(9, $Numero_serie);
         $sql->bindValue(10, $Codigo_isil);
-        $sql->bindValue(11, $Cantidad);
-        $sql->bindValue(12, $Imagen);
-        $sql->bindValue(13, $ID_usuario);
-        $sql->bindValue(14, $ID_operatividad);
-        $sql->bindValue(15, $Observaciones);
+        if ($imagen_contenido !== null) {
+            $sql->bindValue(11, $imagen_contenido, PDO::PARAM_LOB);
+        } else {
+            $sql->bindValue(11, null, PDO::PARAM_NULL);
+        }
+        $sql->bindValue(12, $ID_usuario);
+        $sql->bindValue(13, $ID_operatividad);
+        $sql->bindValue(14, $Observaciones);
         $sql->execute();
-        return $resultado = $sql->fetchAll(); 
+        return $resultado = $sql->fetchAll();
     }
 
-    public function update_ficha($ID_ficha, $ID_sede, $ID_torre, $Salon, $ID_almacen, $ID_equipo, $Descripcion, $ID_marca, $ID_modelo, $Numero_serie, $Codigo_isil, $Cantidad, $Imagen, $ID_usuario, $ID_operatividad, $Observaciones){
+    public function update_ficha($ID_ficha, $ID_sede, $ID_torre, $Salon, $ID_almacen, $ID_equipo, $Descripcion, $ID_marca, $ID_modelo, $Numero_serie, $Codigo_isil, $Imagen, $ID_usuario, $ID_operatividad, $Observaciones)
+    {
         $conectar = parent::conexion();
         parent::set_names();
+
+        $imagen_contenido = null;
+        // Verificar si se proporcionó una imagen
+        if (isset($Imagen) && !empty($Imagen["tmp_name"])) {
+            $allowed_formats = array('jpg', 'jpeg', 'png');
+            $max_file_size = 5 * 1024 * 1024;
+
+            $file_info = pathinfo($Imagen["name"]);
+            $file_extension = strtolower($file_info['extension']);
+
+            if (in_array($file_extension, $allowed_formats) && $Imagen["size"] <= $max_file_size) {
+                $imagen_contenido = file_get_contents($Imagen["tmp_name"]);
+            } else {
+                echo "Error: Formato de archivo no permitido o tamaño excedido.";
+                return;
+            }
+        }
 
         $sql_usuario_modificador = "SELECT Nombre, Apellidos FROM usuario WHERE ID_usuario = ?";
         $stmt_usuario_modificador = $conectar->prepare($sql_usuario_modificador);
@@ -37,9 +77,27 @@ class Ficha extends Conectar {
         $usuario_modificador = $stmt_usuario_modificador->fetch(PDO::FETCH_ASSOC);
         $nombre_apellidos_usuario_modificador = $usuario_modificador["Nombre"] . ' ' . $usuario_modificador["Apellidos"];
 
-
-
-        $sql = "UPDATE ficha set
+        if ($imagen_contenido !== null) {
+            $sql = "UPDATE ficha set
+                ID_sede = ?, 
+                ID_torre = ?, 
+                Salon = ?, 
+                ID_almacen = ?, 
+                ID_equipo = ?, 
+                Descripcion = ?, 
+                ID_marca = ?, 
+                ID_modelo = ?, 
+                Numero_serie = ?, 
+                Codigo_isil = ?,
+                Imagen = ?,
+                ID_operatividad = ?,
+                Observaciones = ?,
+                ID_usuario_modificador = ?,
+                Fecha_modificacion = now()
+                WHERE 
+                ID_ficha = ?";
+        } else {
+            $sql = "UPDATE ficha set
                 ID_sede = ?, 
                 ID_torre = ?, 
                 Salon = ?, 
@@ -50,15 +108,14 @@ class Ficha extends Conectar {
                 ID_modelo = ?, 
                 Numero_serie = ?, 
                 Codigo_isil = ?, 
-                Cantidad = ?, 
-                Imagen = ?,
                 ID_operatividad = ?,
                 Observaciones = ?,
                 ID_usuario_modificador = ?,
                 Fecha_modificacion = now()
                 WHERE 
                 ID_ficha = ?";
-                 
+        }
+
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ID_sede);
         $sql->bindValue(2, $ID_torre);
@@ -70,17 +127,24 @@ class Ficha extends Conectar {
         $sql->bindValue(8, $ID_modelo);
         $sql->bindValue(9, $Numero_serie);
         $sql->bindValue(10, $Codigo_isil);
-        $sql->bindValue(11, $Cantidad);
-        $sql->bindValue(12, $Imagen);
-        $sql->bindValue(13, $ID_operatividad);
-        $sql->bindValue(14, $Observaciones);  
-        $sql->bindValue(15, $nombre_apellidos_usuario_modificador);
-        $sql->bindValue(16, $ID_ficha);
+        if ($imagen_contenido !== null) {
+            $sql->bindValue(11, $imagen_contenido, PDO::PARAM_LOB);
+            $sql->bindValue(12, $ID_operatividad);
+            $sql->bindValue(13, $Observaciones);
+            $sql->bindValue(14, $nombre_apellidos_usuario_modificador);
+            $sql->bindValue(15, $ID_ficha);
+        } else {
+            $sql->bindValue(11, $ID_operatividad);
+            $sql->bindValue(12, $Observaciones);
+            $sql->bindValue(13, $nombre_apellidos_usuario_modificador);
+            $sql->bindValue(14, $ID_ficha);
+        }
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
-    public function delete_ficha($ID_ficha){
+    public function delete_ficha($ID_ficha)
+    {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "DELETE FROM ficha WHERE ID_ficha=?";
@@ -90,7 +154,9 @@ class Ficha extends Conectar {
         return $resultado = $sql->fetchAll();
     }
 
-    public function listar_ficha(){
+
+    public function listar_ficha()
+    {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT 
@@ -111,7 +177,6 @@ class Ficha extends Conectar {
                 modelo.Nombre_modelo,
                 ficha.Numero_serie,
                 ficha.Codigo_isil,
-                ficha.Cantidad,
                 ficha.Imagen,
                 ficha.ID_usuario,
                 usuario.Nombre,
@@ -139,7 +204,8 @@ class Ficha extends Conectar {
 
 
 
-    public function get_ficha_x_id($ID_ficha){
+    public function get_ficha_x_id($ID_ficha)
+    {
         $conectar = parent::conexion();
         parent::set_names();
         $sql = "SELECT 
@@ -160,7 +226,6 @@ class Ficha extends Conectar {
                 modelo.Nombre_modelo,
                 ficha.Numero_serie,
                 ficha.Codigo_isil,
-                ficha.Cantidad,
                 ficha.Imagen,
                 ficha.ID_usuario,
                 usuario.Nombre,
@@ -188,7 +253,4 @@ class Ficha extends Conectar {
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-
-
-
 }

@@ -15,10 +15,7 @@ $(document).ready(function () {
         lengthChange: false,
         colReorder: true,
         buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
+
         ],
         "ajax": {
             url: '../../Controllers/reportes.php?op=listar_stock',
@@ -186,7 +183,12 @@ function ver(ID_ficha) {
         $('#Numero_serie').val(data.Numero_serie);
         $('#Codigo_isil').val(data.Codigo_isil);
         $('#Cantidad').val(data.Cantidad);
-        $('#Imagen').val(data.Imagen);
+        if (data.Imagen) {
+            $('#Imagen').attr('src', 'data:image/*;base64,' + data.Imagen);
+        } else {
+            // Si no hay imagen, puedes ocultar la etiqueta img o mostrar un marcador de posición.
+            $('#Imagen').hide(); // o cualquier otra lógica según tu diseño.
+        }
         $('#ID_usuario').val(data.ID_usuario);
         $('#ID_operatividad').val(data.ID_operatividad).trigger('change');
         $('#Observaciones').val(data.Observaciones);

@@ -29,6 +29,7 @@ if (isset($_SESSION["ID_usuario"])) {
                 <table id="ficha_data" class="table table-bordered table-striped table-vcenter js-dataTable-full">
                     <thead>
                         <tr>
+                            <th style="width: 1%;">ID</th>
                             <th style="width: 1%;">Sede</th>
                             <th style="width: 1%;">Torre</th>
                             <th style="width: 1%;">Salon</th>
@@ -39,8 +40,7 @@ if (isset($_SESSION["ID_usuario"])) {
                             <th style="width: 1%;">Modelo</th>
                             <th style="width: 1%;">Numero serie</th>
                             <th style="width: 1%;">Codigo isil</th>
-                            <th style="width: 1%;">Cantidad</th>
-                            <th style="width: 1%;">Imagen</th>
+                            <th style="width: 5%;">Imagen</th>
                             <th style="width: 1%;">Usuario</th>
                             <th style="width: 1%;">Estado</th>
                             <th style="width: 1%;">Observaciones</th>

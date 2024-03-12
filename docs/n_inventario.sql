@@ -559,14 +559,14 @@ CREATE TABLE `usuario` (
   `Correo` varchar(50) DEFAULT NULL,
   `Numero` int(11) DEFAULT NULL,
   `Usuario` varchar(30) DEFAULT NULL,
-  `Contraseña` varchar(30) DEFAULT NULL
+  `contrasena` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`ID_usuario`, `ID_roles`, `Nombre`, `Apellidos`, `Correo`, `Numero`, `Usuario`, `Contraseña`) VALUES
+INSERT INTO `usuario` (`ID_usuario`, `ID_roles`, `Nombre`, `Apellidos`, `Correo`, `Numero`, `Usuario`, `contrasena`) VALUES
 (1, 1, 'Miguel John', 'Quispe Pozo', 'correo1@gmail.com', 906838713, 'mquispe', '12345'),
 (2, 3, 'Gonzalo Ronald', 'García Saravia', 'correo2@gmail.com', 913593235, 'ggarcias', '12345'),
 (3, 1, 'Isaac Jedidias', 'Olivera Colonio ', 'correo3@gmail.com', 969703281, 'iolivera', '12345'),

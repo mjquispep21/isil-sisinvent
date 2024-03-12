@@ -7,11 +7,12 @@ switch ($_GET["op"]) {
 
     case "guardaryeditar":
         if(empty($_POST["ID_ficha"])){       
-            $ficha->insert_ficha($_POST["ID_sede"], $_POST["ID_torre"], $_POST["Salon"], $_POST["ID_almacen"], $_POST["ID_equipo"], $_POST["Descripcion"], $_POST["ID_marca"], $_POST["ID_modelo"], $_POST["Numero_serie"], $_POST["Codigo_isil"], $_POST["Cantidad"], $_POST["Imagen"], $_POST["ID_usuario"], $_POST["ID_operatividad"], $_POST["Observaciones"] );
+            $ficha->insert_ficha($_POST["ID_sede"], $_POST["ID_torre"], $_POST["Salon"], $_POST["ID_almacen"], $_POST["ID_equipo"], $_POST["Descripcion"], $_POST["ID_marca"], $_POST["ID_modelo"], $_POST["Numero_serie"], $_POST["Codigo_isil"], $_FILES["Imagen"], $_POST["ID_usuario"], $_POST["ID_operatividad"], $_POST["Observaciones"] );
                
         }
         else {
-            $ficha->update_ficha($_POST["ID_ficha"], $_POST["ID_sede"], $_POST["ID_torre"], $_POST["Salon"], $_POST["ID_almacen"], $_POST["ID_equipo"], $_POST["Descripcion"], $_POST["ID_marca"], $_POST["ID_modelo"], $_POST["Numero_serie"], $_POST["Codigo_isil"], $_POST["Cantidad"], $_POST["Imagen"], $_POST["ID_usuario"], $_POST["ID_operatividad"], $_POST["Observaciones"]);  
+            $ficha->update_ficha($_POST["ID_ficha"], $_POST["ID_sede"], $_POST["ID_torre"], $_POST["Salon"], $_POST["ID_almacen"], $_POST["ID_equipo"], $_POST["Descripcion"], $_POST["ID_marca"], $_POST["ID_modelo"], $_POST["Numero_serie"], $_POST["Codigo_isil"], $_FILES["Imagen"], $_POST["ID_usuario"], $_POST["ID_operatividad"], $_POST["Observaciones"]);  
+            break;
         }
     break;
 
@@ -33,8 +34,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Nombre_modelo"];
             $sub_array[] = $row["Numero_serie"];
             $sub_array[] = $row["Codigo_isil"];
-            $sub_array[] = $row["Cantidad"];
-            $sub_array[] = $row["Imagen"];
+            $sub_array[] = '<img src="data:image/jpeg;base64,' . base64_encode($row["Imagen"]) . '" alt="Imagen" class="img-thumbnail" width="100" height="100">';
             $sub_array[] = $row["Nombre"].' '.$row["Apellidos"];
             $sub_array[] = $row["Tipo_operatividad"];
             $sub_array[] = $row["Observaciones"];
@@ -76,14 +76,14 @@ switch ($_GET["op"]) {
                 $output["ID_modelo"] = $row["ID_modelo"];
                 $output["Numero_serie"] = $row["Numero_serie"];
                 $output["Codigo_isil"] = $row["Codigo_isil"];
-                $output["Cantidad"] = $row["Cantidad"];
-                $output["Imagen"] = $row["Imagen"];
+                $output["Imagen"] = base64_encode($row["Imagen"]);
                 $output["ID_usuario"] = $row["ID_usuario"];
                 $output["ID_operatividad"] = $row["ID_operatividad"];
                 $output["Observaciones"] = $row["Observaciones"];
                 $output["Fecha_registro"] = $row["Fecha_registro"];
                 $output["ID_usuario_modificador"] = $row["ID_usuario_modificador"];
                 $output["Fecha_modificacion"] = $row["Fecha_modificacion"];
+                
             }
             echo json_encode($output);
         }else {
