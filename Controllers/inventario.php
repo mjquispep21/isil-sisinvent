@@ -22,7 +22,6 @@ switch ($_GET["op"]) {
         $data = array();
         foreach ($datos as $row) {
             $sub_array = array();
-
             $sub_array[] = $row["ID_ficha"];
             $sub_array[] = $row["Nombre_sede"];
             $sub_array[] = $row["Nombre_torre"];
@@ -34,7 +33,12 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Nombre_modelo"];
             $sub_array[] = $row["Numero_serie"];
             $sub_array[] = $row["Codigo_isil"];
-            $sub_array[] = '<img src="data:image/jpeg;base64,' . base64_encode($row["Imagen"]) . '" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            if ($row["Imagen"]) {
+                $imagen = base64_encode($row["Imagen"]);
+                $sub_array[] = '<img src="data:image/jpeg;base64,' . $imagen . '" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            } else {
+                $sub_array[] = '<img src="../../assets/img/pendiente.jpg" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            }
             $sub_array[] = $row["Nombre"].' '.$row["Apellidos"];
             $sub_array[] = $row["Tipo_operatividad"];
             $sub_array[] = $row["Observaciones"];
@@ -76,8 +80,11 @@ switch ($_GET["op"]) {
                 $output["ID_modelo"] = $row["ID_modelo"];
                 $output["Numero_serie"] = $row["Numero_serie"];
                 $output["Codigo_isil"] = $row["Codigo_isil"];
-                $output["Imagen"] = base64_encode($row["Imagen"]);
-                $output["ID_usuario"] = $row["ID_usuario"];
+                if ($row["Imagen"] !== null) {
+                    $output["Imagen"] = base64_encode($row["Imagen"]);
+                } else {
+                    $output["Imagen"] = null; // o cualquier valor predeterminado que desees
+                }                $output["ID_usuario"] = $row["ID_usuario"];
                 $output["ID_operatividad"] = $row["ID_operatividad"];
                 $output["Observaciones"] = $row["Observaciones"];
                 $output["Fecha_registro"] = $row["Fecha_registro"];

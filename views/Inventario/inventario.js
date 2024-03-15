@@ -8,31 +8,42 @@ function init() {
 
 function guardaryeditar(e){
     e.preventDefault();
-	var formData = new FormData($("#inventario_form")[0]);
-    $.ajax({
-        url: "../../Controllers/inventario.php?op=guardaryeditar",
-        type: "POST",
-        data: formData,
-        contentType: false,
-        processData: false,
-        success: function(datos){    
-            console.log(datos);
-            $('#inventario_form')[0].reset();
-            $("#modalinventario").modal('hide');
-            $('#ficha_data').DataTable().ajax.reload();
+	// Si el formulario es válido, procede con la solicitud AJAX
+    if ($('#inventario_form').valid()) {
+        var formData = new FormData($("#inventario_form")[0]);
+        $.ajax({
+            url: "../../Controllers/inventario.php?op=guardaryeditar",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(datos){    
+                console.log(datos);
+                $('#inventario_form')[0].reset();
+                $("#modalinventario").modal('hide');
+                $('#ficha_data').DataTable().ajax.reload();
 
-            swal({
-                title: "SIS-INVENTA!",
-                text: "Completado.",
-                type: "success",
-                confirmButtonClass: "btn-success"
-            });
-        }
-    }); 
+                swal({
+                    title: "SIS-INVENTA!",
+                    text: "Completado.",
+                    type: "success",
+                    confirmButtonClass: "btn-success"
+                });
+            }
+        }); 
+    }
 }
 
 $(document).ready(function () {
 
+    
+    $('#inventario_form').validate({
+        submit: {
+            settings: {
+                inputContainer: '.form-group',
+            }
+        }
+    });
 
     tabla = $('#ficha_data').dataTable({
         "aProcessing": true,
@@ -98,35 +109,61 @@ $(document).ready(function () {
         }
     });
 
+    
     $.post("../../Controllers/categoria.php?op=combo_sede", function (data, status) {
-        $('#ID_sede').html(data);
+        var defaultOption = '<option value="" disabled selected>Seleccione</option>';
+        $('#ID_sede').html(defaultOption + data);
     });
 
     $.post("../../Controllers/categoria.php?op=combo_torre", function (data, status) {
-        $('#ID_torre').html(data);
+        var defaultOption = '<option value="" disabled selected>Seleccione</option>';
+        $('#ID_torre').html(defaultOption + data);
     });
 
     $.post("../../Controllers/categoria.php?op=combo_almacen", function (data, status) {
-        $('#ID_almacen').html(data);
+        var defaultOption = '<option value="" disabled selected>Seleccione</option>';
+        $('#ID_almacen').html(defaultOption + data);
     });
 
-    $.post("../../Controllers/categoria.php?op=combo_equipo", function (data, status) {
-        $('#ID_equipo').html(data);
+    $('#ID_almacen').change(function() {
+        var ID_Almacen = $(this).val();
+        $.post("../../Controllers/categoria.php?op=combo_equipo", {ID_Almacen: ID_Almacen}, function(data) {
+            $('#ID_equipo').html(data);
+        });
     });
 
     $.post("../../Controllers/categoria.php?op=combo_marca", function (data, status) {
-        $('#ID_marca').html(data);
+        var defaultOption = '<option value="" disabled selected>Seleccione</option>';
+        $('#ID_marca').html(defaultOption + data);
     });
 
     $.post("../../Controllers/categoria.php?op=combo_modelo", function (data, status) {
-        $('#ID_modelo').html(data);
+        var defaultOption = '<option value="" disabled selected>Seleccione</option>';
+        $('#ID_modelo').html(defaultOption + data);
     });
 
     $.post("../../Controllers/categoria.php?op=combo_operatividad", function (data, status) {
-        $('#ID_operatividad').html(data);
+        var defaultOption = '<option value="" disabled selected>Seleccione</option>';
+        $('#ID_operatividad').html(defaultOption + data);
     });
 
 
+    
+    // Agregar el buscador a los combobox 
+    $('#ID_almacen').select2({
+        dropdownParent: $('.modal-body')
+    });
+
+    $('#ID_equipo').select2({
+        dropdownParent: $('.modal-body')
+    });
+    $('#ID_marca').select2({
+        dropdownParent: $('.modal-body')
+    });
+    $('#ID_modelo').select2({
+        dropdownParent: $('.modal-body')
+    });
+    
 });
 
 function editar(ID_ficha) {
@@ -140,7 +177,20 @@ function editar(ID_ficha) {
         $('#ID_torre').val(data.ID_torre).trigger('change');
         $('#Salon').val(data.Salon);
         $('#ID_almacen').val(data.ID_almacen).trigger('change');
-        $('#ID_equipo').val(data.ID_equipo).trigger('change');
+        
+        var promise = new Promise(function(resolve, reject) {
+            $('#ID_almacen').change(function() {
+                var ID_Almacen = $(this).val();
+                $.post("../../Controllers/categoria.php?op=combo_equipo", {ID_Almacen: ID_Almacen}, function(data) {
+                    $('#ID_equipo').html(data);
+                    resolve(); // Resuelve la promesa cuando los datos se han cargado
+                });
+            }).change();
+        });
+        promise.then(function() {
+            $('#ID_equipo').val(data.ID_equipo).trigger('change');
+        });
+
         $('#Descripcion').val(data.Descripcion);
         $('#ID_marca').val(data.ID_marca).trigger('change');
         $('#ID_modelo').val(data.ID_modelo).trigger('change');
@@ -149,6 +199,9 @@ function editar(ID_ficha) {
         $('#ID_usuario').val(data.ID_usuario);
         $('#ID_operatividad').val(data.ID_operatividad).trigger('change');
         $('#Observaciones').val(data.Observaciones);
+
+        
+        
     });
 
     $('#modalinventario').modal('show');

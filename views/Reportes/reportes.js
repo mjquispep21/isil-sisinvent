@@ -186,8 +186,8 @@ function ver(ID_ficha) {
         if (data.Imagen) {
             $('#Imagen').attr('src', 'data:image/*;base64,' + data.Imagen);
         } else {
-            // Si no hay imagen, puedes ocultar la etiqueta img o mostrar un marcador de posición.
-            $('#Imagen').hide(); // o cualquier otra lógica según tu diseño.
+            // Si no hay imagen, muestra una imagen predeterminada.
+            $('#Imagen').attr('src', '../../assets/img/pendiente.jpg');
         }
         $('#ID_usuario').val(data.ID_usuario);
         $('#ID_operatividad').val(data.ID_operatividad).trigger('change');

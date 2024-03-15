@@ -22,7 +22,11 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Nombre_modelo"];
             $sub_array[] = $row["Numero_serie"];
             $sub_array[] = $row["Codigo_isil"];
-            $sub_array[] = '<img src="data:image/jpeg;base64,' . base64_encode($row["Imagen"]) . '" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            if ($row["Imagen"]) {
+                $sub_array[] = '<img src="data:image/jpeg;base64,' . base64_encode($row["Imagen"]) . '" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            } else {
+                $sub_array[] = '<img src="../../assets/img/pendiente.jpg" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            }
             $sub_array[] = $row["Nombre"].' '.$row["Apellidos"];
             if ($row["ID_operatividad"] == "1") {
                 $sub_array[] = '<span class="label label-pill label-success">Operativo</span>';

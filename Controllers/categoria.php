@@ -6,6 +6,7 @@
         switch($_GET["op"]){
             case "combo_sede":
                 $datos=$categoria-> get_categoria_sede();
+                $html="";
                 if(is_array($datos)==true and count($datos)>0){
                     foreach($datos as $row)
                     {
@@ -17,6 +18,7 @@
 
             case "combo_torre":
                 $datos=$categoria-> get_categoria_torre();
+                $html="";
                 if(is_array($datos)==true and count($datos)>0){
                     foreach($datos as $row)
                     {
@@ -28,6 +30,7 @@
 
             case "combo_almacen":
                 $datos=$categoria-> get_categoria_almacen();
+                $html="";
                 if(is_array($datos)==true and count($datos)>0){
                     foreach($datos as $row)
                     {
@@ -38,13 +41,16 @@
             break;
 
             case "combo_equipo":
-                $datos=$categoria-> get_categoria_equipo();
-                if(is_array($datos)==true and count($datos)>0){
-                    foreach($datos as $row)
-                    {
-                        $html.="<option value='".$row['ID_equipo']."'>".$row['Nombre_equipo']."</option>";
+                if(isset($_POST["ID_Almacen"])) {
+                    $datos=$categoria->get_categoria_equipo($_POST["ID_Almacen"]);
+                    $html="";
+                    if(is_array($datos)==true and count($datos)>0){
+                        foreach($datos as $row)
+                        {
+                            $html.="<option value='".$row['ID_equipo']."'>".$row['Nombre_equipo']."</option>";
+                        }
+                        echo $html;
                     }
-                    echo $html;
                 }
             break;
 
@@ -62,6 +68,7 @@
 
             case "combo_modelo":
                 $datos=$categoria-> get_categoria_modelo();
+                $html="";
                 if(is_array($datos)==true and count($datos)>0){
                     foreach($datos as $row)
                     {
@@ -73,6 +80,7 @@
 
             case "combo_operatividad":
                 $datos=$categoria-> get_categoria_operatividad();
+                $html="";
                 if(is_array($datos)==true and count($datos)>0){
                     foreach($datos as $row)
                     {
