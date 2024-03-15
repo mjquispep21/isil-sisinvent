@@ -50,6 +50,7 @@
 
             case "combo_marca":
                 $datos=$categoria-> get_categoria_marca();
+                $html="";
                 if(is_array($datos)==true and count($datos)>0){
                     foreach($datos as $row)
                     {

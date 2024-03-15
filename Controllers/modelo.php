@@ -10,13 +10,9 @@
         /* TODO: Guardar y editar, guardar si el campo ID_modelo esta vacio */
         case "guardaryeditar":
             if(empty($_POST["ID_modelo"])){
-                if (isset($_POST["ID_marca"]) && isset($_POST["Nombre_modelo"])) {
-                    $modelo->insert_modelo($_POST["ID_marca"],$_POST["Nombre_modelo"]);     
-                }
-            } else {
-                if (isset($_POST["ID_modelo"]) && isset($_POST["ID_marca"]) && isset($_POST["Nombre_modelo"])) {
-                    $modelo->update_modelo($_POST["ID_modelo"],$_POST["ID_marca"],$_POST["Nombre_modelo"]);
-                }
+                $modelo->insert_modelo($_POST["ID_marca"],$_POST["Nombre_modelo"]);     
+            }else {
+                $modelo->update_modelo($_POST["ID_modelo"],$_POST["ID_marca"],$_POST["Nombre_modelo"]);
             }
             break;
         /* TODO: Listado de prioridad segun formato json para el datatable */
@@ -56,31 +52,23 @@
                 echo json_encode($output);
             }
             break;
-        /* TODO: Formato para llenar combo en formato HTML */
-        case "combo":
-            $datos = $modelo->get_modelo($_POST["ID_marca"]);
-            $html="";
-            $html.="<option label='Seleccionar'></option>";
-            if(is_array($datos)==true and count($datos)>0){
-                foreach($datos as $row)
-                {
-                    $html.= "<option value='".$row['ID_modelo']."'>".$row['Nombre_modelo']."</option>";
-                }
-                echo $html;
-            }
-            break;
-
-
-
+        
             case "combo_marca":
-                $datos=$categoria-> get_categoria_marca();
+                $datos=$modelo-> get_modelo_marca();
+                $html="";
                 if(is_array($datos)==true and count($datos)>0){
                     foreach($datos as $row)
                     {
-                        $html.="<option value='".$row['ID_modelo']."'>".$row['Nombre_modelo']."</option>";
+                        $html.="<option value='".$row['ID_marca']."'>".$row['Nombre_marca']."</option>";
                     }
                     echo $html;
                 }
             break;
+
+            
+
+
+
+
     }
 ?>

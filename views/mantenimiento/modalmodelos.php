@@ -12,11 +12,12 @@
                     <input type="hidden" id="ID_modelo" name="ID_modelo">
 
                     <div class="form-group">
-                        <label class="form-label" for="ID_marca">Categoria</label>
-                        <select class="select2" id="ID_marca" name="ID_marca">
-
-                        </select>
-                    </div>
+							<fieldset class="form-group">
+								<label class="form-label" for="ID_marca">Sede</label>
+								<select id="ID_marca" name="ID_marca" class="form-control"></select>
+							</fieldset>
+						</div>
+                    
 
                     <div class="form-group">
                         <label class="form-label" for="Nombre_modelo">Nombre</label>

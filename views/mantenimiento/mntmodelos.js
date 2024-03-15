@@ -36,17 +36,15 @@ function guardaryeditar(e){
 
 $(document).ready(function(){
 
-    $.post("../../Controllers/modelo.php?op=combo",function(data, status){
-        $('#ID_marca').html(data);
-    });
-
     tabla=$('#usuario_data').dataTable({
         "aProcessing": true,
         "aServerSide": true,
-        dom: 'Bfrtip',
+        dom: 'Bfrtilp',
         "searching": true,
-        lengthChange: false,
-        colReorder: true,
+        
+        lengthChange: true,
+        
+        colReorder: false,
         buttons: [		          
                 'copyHtml5',
                 'excelHtml5',
@@ -91,6 +89,11 @@ $(document).ready(function(){
             }
         }     
     }).DataTable(); 
+
+    $.post("../../Controllers/modelo.php?op=combo_marca",function(data, status){
+        $('#ID_marca').html(data);
+    });
+
 });
 
 /* TODO: Mostrar informacion segun ID en los inputs */
