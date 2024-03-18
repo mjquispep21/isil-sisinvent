@@ -20,7 +20,7 @@ class Categoria extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-
+    
     public function get_categoria_almacen()
     {
         $conectar = parent::conexion();
