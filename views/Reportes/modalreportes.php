@@ -81,10 +81,10 @@
 								<input type="text" class="form-control" id="Codigo_isil" name="Codigo_isil" disabled>
 							</fieldset>
 						</div>
-						<div class="col-lg-12 display" style="margin-top: 20px;">
+						<div class="col-lg-12 display">
 							<fieldset class="form-group">
-								<label class="form-label text-center" for="exampleInput">-- Imagen --</label>
-								<img id="Imagen" name="Imagen" class="img-thumbnail" width="100%" height="auto">
+								<label class="form-label" for="exampleInput">-- Imagen --</label>
+								<img id="Imagen" name="Imagen" class="img-thumbnail" width="50%" height="auto">
 							</fieldset>
 						</div>
 						<input type="hidden" id="ID_usuario" name="ID_usuario" value="<?php echo $_SESSION["ID_usuario"] ?>">

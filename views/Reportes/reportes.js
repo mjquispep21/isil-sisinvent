@@ -176,7 +176,20 @@ function ver(ID_ficha) {
         $('#ID_torre').val(data.ID_torre).trigger('change');
         $('#Salon').val(data.Salon);
         $('#ID_almacen').val(data.ID_almacen).trigger('change');
-        $('#ID_equipo').val(data.ID_equipo).trigger('change');
+        
+        var promise = new Promise(function(resolve, reject) {
+            $('#ID_almacen').change(function() {
+                var ID_Almacen = $(this).val();
+                $.post("../../Controllers/categoria.php?op=combo_equipo", {ID_Almacen: ID_Almacen}, function(data) {
+                    $('#ID_equipo').html(data);
+                    resolve(); // Resuelve la promesa cuando los datos se han cargado
+                });
+            }).change();
+        });
+        promise.then(function() {
+            $('#ID_equipo').val(data.ID_equipo).trigger('change');
+        });
+        
         $('#Descripcion').val(data.Descripcion);
         $('#ID_marca').val(data.ID_marca).trigger('change');
         $('#ID_modelo').val(data.ID_modelo).trigger('change');

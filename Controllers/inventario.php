@@ -47,7 +47,6 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Fecha_modificacion"];
 
             $sub_array[] = '<button type="button" onClick="editar(' . $row["ID_ficha"] . ');"  id="' . $row["ID_ficha"] . '" class="btn btn-inline btn-primary btn-sm ladda-button"><i class="fa fa-edit"></i></button>';
-
             $sub_array[] = '<button type="button" onClick="eliminar(' . $row["ID_ficha"] . ');"  id="' . $row["ID_ficha"] . '" class="btn btn-inline btn-danger btn-sm ladda-button"><i class="fa fa-trash"></i></button>';
 
             $data[] = $sub_array;

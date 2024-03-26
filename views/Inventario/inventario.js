@@ -94,6 +94,7 @@ $(document).ready(function () {
         }
     }).DataTable();
 
+    
 
     $('#ficha_descrip').summernote({
         height: 400,
@@ -247,4 +248,5 @@ $(document).on("click", "#btnnuevo", function () {
     $('#inventario_form')[0].reset();
     $('#modalinventario').modal('show');
 });
+
 init();
