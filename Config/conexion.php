@@ -11,7 +11,7 @@
         protected function Conexion(){
             try {
                 //TODO: Se establece la conexión a la base de datos usando PDO.
-                $conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=n_inventario","root","");
+                $conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=isil_inventario","root","");
                 //TODO: Se retorna el objeto PDO con la conexión establecida.
                 return $conectar;
             } catch (Exception $e) {
