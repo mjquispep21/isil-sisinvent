@@ -253,4 +253,5 @@ class Ficha extends Conectar
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
+
 }

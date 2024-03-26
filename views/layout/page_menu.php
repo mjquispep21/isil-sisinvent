@@ -57,8 +57,14 @@
                 <ul>
                     <li><a href="<?php echo Conectar::ruta() . "views/mantenimiento/modelos.php" ?>"><span class="lbl">Modelos</span></a></li>
                 </ul>
-            </li>            
-            
+            </li>          
+            <!-- Historial -->
+            <li class="blue-dirty">
+                <a href="<?php echo Conectar::ruta() . "views/Historial/" ?>">
+                    <span class="glyphicon glyphicon-th"></span>
+                    <span class="lbl">Historial</span>
+                </a>
+            </li>
         <?php
         } elseif ($_SESSION["ID_roles"] == 2) {
         ?>
