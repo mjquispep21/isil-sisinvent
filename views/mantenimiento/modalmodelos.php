@@ -13,7 +13,7 @@
 
                     <div class="form-group">
 							<fieldset class="form-group">
-								<label class="form-label" for="ID_marca">Sede</label>
+								<label class="form-label" for="ID_marca">Marca</label>
 								<select id="ID_marca" name="ID_marca" class="form-control"></select>
 							</fieldset>
 						</div>

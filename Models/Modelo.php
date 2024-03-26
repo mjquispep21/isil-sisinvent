@@ -5,7 +5,7 @@ class Modelo extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql="SELECT * FROM marca";
+        $sql="SELECT * FROM marca ORDER BY Nombre_marca ASC";
         $sql=$conectar-> prepare($sql);
         $sql->execute();
         return $resultado=$sql->fetchAll();
