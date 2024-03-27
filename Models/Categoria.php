@@ -35,7 +35,8 @@ class Categoria extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM equipo WHERE ID_Almacen = ?";
+        $sql = "SELECT * FROM equipo WHERE ID_Almacen = ?
+        ORDER BY equipo.Nombre_equipo ASC"; 
         $sql = $conectar->prepare($sql);
         $sql->execute(array($ID_Almacen));
         return $resultado=$sql->fetchAll();
@@ -45,21 +46,22 @@ class Categoria extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "SELECT * FROM marca";
+        $sql = "SELECT * FROM marca 
+        ORDER BY marca.Nombre_marca ASC";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
 
-    public function get_categoria_modelo()
-    {
-        $conectar = parent::conexion();
-        parent::set_names();
-        $sql = "SELECT * FROM modelo";
-        $sql = $conectar->prepare($sql);
-        $sql->execute();
-        return $resultado = $sql->fetchAll();
-    }
+    public function get_categoria_modelo($ID_marca)
+{
+    $conectar = parent::conexion();
+    parent::set_names();
+    $sql = "SELECT * FROM modelo WHERE ID_marca = ? ORDER BY modelo.Nombre_modelo ASC";
+    $sql = $conectar->prepare($sql);
+    $sql->execute(array($ID_marca));
+    return $resultado = $sql->fetchAll();
+}
 
     public function get_categoria_operatividad()
     {

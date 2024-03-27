@@ -138,10 +138,14 @@ $(document).ready(function () {
         $('#ID_marca').html(defaultOption + data);
     });
 
-    $.post("../../Controllers/categoria.php?op=combo_modelo", function (data, status) {
-        var defaultOption = '<option value="" disabled selected>Seleccione</option>';
-        $('#ID_modelo').html(defaultOption + data);
+    $('#ID_marca').change(function() {
+        var ID_marca = $(this).val();
+        $.post("../../Controllers/categoria.php?op=combo_modelo", {ID_marca: ID_marca}, function(data) {
+            $('#ID_modelo').html(data);
+        });
     });
+
+    
 
     $.post("../../Controllers/categoria.php?op=combo_operatividad", function (data, status) {
         var defaultOption = '<option value="" disabled selected>Seleccione</option>';

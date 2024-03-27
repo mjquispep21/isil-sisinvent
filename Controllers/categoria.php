@@ -66,17 +66,32 @@
                 }
             break;
 
+
             case "combo_modelo":
-                $datos=$categoria-> get_categoria_modelo();
-                $html="";
-                if(is_array($datos)==true and count($datos)>0){
-                    foreach($datos as $row)
-                    {
-                        $html.="<option value='".$row['ID_modelo']."'>".$row['Nombre_modelo']."</option>";
+                if(isset($_POST["ID_marca"])) {
+                    $datos=$categoria->get_categoria_modelo($_POST["ID_marca"]);
+                    $html="";
+                    if(is_array($datos)==true and count($datos)>0){
+                        foreach($datos as $row)
+                        {
+                            $html.="<option value='".$row['ID_modelo']."'>".$row['Nombre_modelo']."</option>";
+                        }
+                        echo $html;
                     }
-                    echo $html;
                 }
             break;
+
+            // case "combo_modelo":
+            //     $datos=$categoria-> get_categoria_modelo();
+            //     $html="";
+            //     if(is_array($datos)==true and count($datos)>0){
+            //         foreach($datos as $row)
+            //         {
+            //             $html.="<option value='".$row['ID_modelo']."'>".$row['Nombre_modelo']."</option>";
+            //         }
+            //         echo $html;
+            //     }
+            // break;
 
             case "combo_operatividad":
                 $datos=$categoria-> get_categoria_operatividad();
