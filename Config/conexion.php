@@ -29,9 +29,6 @@
         public static function ruta(){
             //TODO: Se retorna la ruta de la aplicación en el servidor web.
             return "http://localhost/isil-sisinvent/";
-
-            //ENTRA CON ESTO SI TE LLAMAS GONZALO:
-            //return "http://172.16.10.194/isil-sisinvent/";
         }
     }
 ?>
