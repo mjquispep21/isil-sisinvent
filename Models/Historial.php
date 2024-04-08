@@ -18,6 +18,7 @@ class Historial extends Conectar
                 modelo.Nombre_modelo,
                 historial_ficha.Numero_serie,
                 historial_ficha.Codigo_isil,
+                historial_ficha.Imagen,
                 usuario.Nombre,
                 usuario.Apellidos,
                 historial_ficha.ID_usuario_modificador,

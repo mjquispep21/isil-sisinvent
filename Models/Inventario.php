@@ -24,7 +24,7 @@ class Ficha extends Conectar
             }
         }
 
-        $sql = "INSERT INTO ficha (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, Imagen, ID_usuario, ID_operatividad, Observaciones, Fecha_registro, ID_usuario_modificador, Fecha_modificacion) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?, now(), NULL, NULL);";
+        $sql = "INSERT INTO ficha (ID_ficha, ID_sede, ID_torre, Salon, ID_almacen, ID_equipo, Descripcion, ID_marca, ID_modelo, Numero_serie, Codigo_isil, Imagen, ID_usuario, ID_operatividad, Observaciones, Fecha_registro, ID_usuario_modificador, Fecha_modificacion, Est) VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?,?, now(), NULL, NULL, 1);";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ID_sede);
         $sql->bindValue(2, $ID_torre);
@@ -147,7 +147,7 @@ class Ficha extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "DELETE FROM ficha WHERE ID_ficha=?";
+        $sql = "UPDATE ficha set Est = 2 WHERE ID_ficha = ?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $ID_ficha);
         $sql->execute();
@@ -186,7 +186,8 @@ class Ficha extends Conectar
                 ficha.Observaciones, 
                 ficha.Fecha_registro,
                 ficha.ID_usuario_modificador, 
-                ficha.Fecha_modificacion
+                ficha.Fecha_modificacion,
+                ficha.Est
                 FROM
                 ficha
                 INNER JOIN sede on sede.ID_sede = ficha.ID_sede
@@ -196,7 +197,9 @@ class Ficha extends Conectar
                 INNER JOIN marca on marca.ID_marca = ficha.ID_marca
                 INNER JOIN modelo on modelo.ID_modelo = ficha.ID_modelo
                 INNER JOIN usuario on usuario.ID_usuario = ficha.ID_usuario 
-                INNER JOIN operatividad on operatividad.ID_operatividad = ficha.ID_operatividad";
+                INNER JOIN operatividad on operatividad.ID_operatividad = ficha.ID_operatividad
+                WHERE 
+                Est=1";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll();
@@ -235,7 +238,8 @@ class Ficha extends Conectar
                 ficha.Observaciones, 
                 ficha.Fecha_registro,
                 ficha.ID_usuario_modificador, 
-                ficha.Fecha_modificacion
+                ficha.Fecha_modificacion,
+                ficha.Est
                 FROM
                 ficha
                 INNER JOIN sede on sede.ID_sede = ficha.ID_sede

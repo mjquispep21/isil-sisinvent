@@ -23,6 +23,12 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["Nombre_modelo"];
             $sub_array[] = $row["Numero_serie"];
             $sub_array[] = $row["Codigo_isil"];
+            if ($row["Imagen"]) {
+                $imagen = base64_encode($row["Imagen"]);
+                $sub_array[] = '<img src="data:image/jpeg;base64,' . $imagen . '" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            } else {
+                $sub_array[] = '<img src="../../assets/img/pendiente.jpg" alt="Imagen" class="img-thumbnail" width="100" height="100">';
+            }
             $sub_array[] = $row["Nombre"] . ' ' . $row["Apellidos"];
             $sub_array[] = $row["ID_usuario_modificador"];
             $sub_array[] = $row["Tipo_operatividad"];
